@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SCRIPT_FILE="$(readlink -f $0)"
+SCRIPT_PATH="$(dirname $SCRIPT_FILE)"
+source $SCRIPT_PATH/../lib/shelllibs/init || exit 2
+
+BIN='/usr/bin/openstack'
+CMD="${BIN} ${*}"
+
+ow.check.args(){
+    re="(delete|remove|stop)"
+    if [[ "${BASH_ARGV[*]}" =~ $re ]]; then
+        m "EXEC: ${CMD}"
+        ask 'Do you want to continue?[yn]'
+    fi
+}
+
+[[ "$SCRIPT_NAME" =~ 'openstack-wrapper' ]] || return
+
+ow.check.args && $CMD

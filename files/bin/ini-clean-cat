@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SCRIPT_FILE="$(readlink -f $0)"
+SCRIPT_PATH="$(dirname $SCRIPT_FILE)"
+source $SCRIPT_PATH/../lib/shelllibs/init || exit 2
+
+to_clr(){ grep -vE "(^#|^$|^\s*$)"; }
+
+[[ "$SCRIPT_NAME" =~ 'ini-clean-cat' ]] || return
+
+cat ${@} | to_clr

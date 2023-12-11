@@ -1,0 +1,5 @@
+SCRIPT_NAME="$(basename $SCRIPT_FILE)"
+
+m(){ echo $@; }
+is_yes(){ re="(y)"; [[ "${1}" =~ $re ]] || exit 1; }
+ask(){ read -n1 -rp "${*}" ans; is_yes $ans; }

@@ -1,0 +1,4 @@
+---
+bin::alias:
+  ini-clean-cat: [inir]
+  openstack-wrapper: [os]
